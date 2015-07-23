@@ -36,6 +36,7 @@
     <script src="{{ asset('js/vendor/jquery-1.11.3.min.js') }}"></script>
     <script src="{{ asset('js/vendor/underscore-min.js') }}"></script>
     <script src="{{ asset('js/vendor/backbone-min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
         $(function(){
