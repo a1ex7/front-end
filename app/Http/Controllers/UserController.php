@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,9 +24,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('books')->paginate(10);
+//        $users = User::with('books')->paginate(10);
+        $users = User::all();
 
-        return view('user/index', ['users'=>$users]);
+//        return view('user/index', ['users'=>$users]);
+        return Response::json($users);
     }
 
     /**
@@ -56,9 +59,7 @@ class UserController extends Controller
 
         if ($validator->fails()) {
 
-            return Redirect::to('users/create')
-                ->withErrors($validator)
-                ->withInput();
+            return Response::json($validator->messages(), 500);
         }
         else {
 
@@ -72,7 +73,7 @@ class UserController extends Controller
 
             Session::flash('message', 'New User successfully created');
 
-            return Redirect::to('users');
+            return Response::json($user);
 
         }
     }
@@ -86,8 +87,9 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $books = $user->books()->get();
-        return view('user/show', ['user' => $user, 'books' => $books]);
+//        $books = $user->books()->get();
+//        return view('user/show', ['user' => $user, 'books' => $books]);
+        return Response::json($user);
     }
 
     /**
@@ -120,9 +122,7 @@ class UserController extends Controller
 
         if ($validator->fails()) {
 
-            return Redirect::to('users/' . $id . '/edit')
-                ->withErrors($validator)
-                ->withInput();
+            return Response::json($validator->messages(), 500);
         }
         else {
 
@@ -136,7 +136,7 @@ class UserController extends Controller
 
             Session::flash('message', 'New User successfully updated');
 
-            return Redirect::to('users');
+            return Response::json($user);
 
         }
     }
@@ -154,6 +154,6 @@ class UserController extends Controller
 
         Session::flash('message', 'Deleted User with ID: ' . $id);
 
-        return Redirect::to('users');
+        return Response::json(['status' => 'ok']);
     }
 }
