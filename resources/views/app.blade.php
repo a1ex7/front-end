@@ -9,7 +9,7 @@
     <!-- Navigation Menu -->
     <nav class="navbar navbar-inverse" role="navigation">
         <div class="container">
-            <a class="navbar-brand" href="#">Binary Library</a>
+            <a class="navbar-brand" href="/">Backbone.js Page</a>
             <ul class="nav navbar-nav">
                 <li><a href="{{ URL::to('users') }}">All Users</a></li>
                 <li><a href="{{ URL::to('users/create') }}">Create a User</a></li>
@@ -19,14 +19,15 @@
         </div>
     </nav>
 
+
     <div class="container">
 
-        <h2> @yield('tittle') </h2>
+        <ul class="nav nav-pills">
+            <li role="presentation" class="active"><a href="#users" data-toggle="pill">Users</a></li>
+            <li role="presentation"><a href="#books" data-toggle="pill">Books</a></li>
+        </ul>
 
-        <!-- Message Block -->
-        @if(Session::has('message'))
-            <div class="alert alert-info">{{ Session::get('message') }}</div>
-        @endif
+        <h2> @yield('tittle') </h2>
 
         <!-- Main Content -->
         @yield('content')
@@ -34,15 +35,10 @@
     </div>
 
     <script src="{{ asset('js/vendor/jquery-1.11.3.min.js') }}"></script>
+    {!! HTML::script('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js') !!}
     <script src="{{ asset('js/vendor/underscore-min.js') }}"></script>
     <script src="{{ asset('js/vendor/backbone-min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-
-    <script>
-        $(function(){
-
-        });
-    </script>
 
 </body>
 </html>
