@@ -90,7 +90,7 @@ var UsersView = Backbone.View.extend({
     model: users,
     el: $(".users-list"),
     initialize: function() {
-        users.fetch();
+
         var self = this;
         this.model.on('add', this.render, this);
         this.model.on('change', function() {
@@ -209,7 +209,7 @@ var BooksView = Backbone.View.extend({
     model: books,
     el: $(".books-list"),
     initialize: function() {
-        books.fetch();
+
         var self = this;
         this.model.on('add', this.render, this);
         this.model.on('change', function() {
@@ -255,7 +255,11 @@ Backbone.history.start();
 
 $(document).ready(function(){
 
+    users.fetch();
+    books.fetch();
+
     $('.add-user').on('click', function(){
+
         var user = new User({
             firstname:  $('.firstname-input').val(),
             lastname:   $('.lastname-input').val(),
@@ -270,6 +274,7 @@ $(document).ready(function(){
     });
 
     $('.add-book').on('click', function(){
+
         var book = new Book({
             title:  $('.title-input').val(),
             author:   $('.author-input').val(),
