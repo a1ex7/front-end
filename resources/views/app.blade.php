@@ -11,10 +11,10 @@
         <div class="container">
             <a class="navbar-brand" href="/">Backbone.js Page</a>
             <ul class="nav navbar-nav">
-                <li><a href="{{ URL::to('users') }}">All Users</a></li>
-                <li><a href="{{ URL::to('users/create') }}">Create a User</a></li>
-                <li><a href="{{ URL::to('books') }}">All Books</a></li>
-                <li><a href="{{ URL::to('books/create') }}">Create a Book</a></li>
+                {{--<li><a href="{{ URL::to('users') }}">All Users</a></li>--}}
+                {{--<li><a href="{{ URL::to('users/create') }}">Create a User</a></li>--}}
+                {{--<li><a href="{{ URL::to('books') }}">All Books</a></li>--}}
+                {{--<li><a href="{{ URL::to('books/create') }}">Create a Book</a></li>--}}
             </ul>
         </div>
     </nav>
