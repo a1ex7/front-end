@@ -16,8 +16,7 @@ var User = Backbone.Model.extend({
     validate: function( attrs ) {
         console.log(attrs);
         if ( attrs.firstname == '' || attrs.lastname == '' || attrs.email == '') {
-            alert('all fields are required');
-            return 'all fields are required';
+            return 'All fields are required';
         }
     }
 });
@@ -26,7 +25,8 @@ var User = Backbone.Model.extend({
 // Backbone Collection
 
 var Users = Backbone.Collection.extend({
-    url: '/users'
+    url: '/users',
+    model: User
 });
 
 
@@ -90,15 +90,14 @@ var UsersView = Backbone.View.extend({
     model: users,
     el: $(".users-list"),
     initialize: function() {
-
-        var self = this;
-        this.model.on('add', this.render, this);
-        this.model.on('change', function() {
-            setTimeout(function(){
-                self.render();
-            }, 30);
-        }, this);
+        this.model.on('sync', this.render, this);
         this.model.on('remove', this.render, this);
+        this.model.on('invalid', function(error, message){
+            alert(message);
+        }, this);
+        this.model.on('error', function (error, message) {
+            alert(message.responseText);
+        }, this);
     },
     render: function(){
         var self = this;
@@ -132,7 +131,6 @@ var Book = Backbone.Model.extend({
     validate: function( attrs ) {
         console.log(attrs);
         if ( attrs.title == '' || attrs.author == '' || attrs.year == '' || attrs.genre == '') {
-            alert('all fields are required');
             return 'all fields are required';
         }
     }
@@ -142,7 +140,8 @@ var Book = Backbone.Model.extend({
 // Backbone Collection
 
 var Books = Backbone.Collection.extend({
-    url: '/books'
+    url: '/books',
+    model: Book
 });
 
 
@@ -209,15 +208,14 @@ var BooksView = Backbone.View.extend({
     model: books,
     el: $(".books-list"),
     initialize: function() {
-
-        var self = this;
-        this.model.on('add', this.render, this);
-        this.model.on('change', function() {
-            setTimeout(function(){
-                self.render();
-            }, 30);
-        }, this);
+        this.model.on('sync', this.render, this);
         this.model.on('remove', this.render, this);
+        this.model.on('invalid', function(error, message){
+            alert(message);
+        }, this);
+        this.model.on('error', function (error, message) {
+            alert(message.responseText);
+        }, this);
     },
     render: function(){
         var self = this;
@@ -267,9 +265,7 @@ $(document).ready(function(){
         });
         $('.firstname-input, .lastname-input, .email-input').val('');
 
-        user.save();
-        users.add(user);
-        //usersView.render();
+        users.create(user);
 
     });
 
@@ -283,9 +279,7 @@ $(document).ready(function(){
         });
         $('.title-input, .author-input, .year-input, .genre-input').val('');
 
-        book.save();
-        books.add(book);
-        //booksView.render();
+        books.create(book);
 
     });
 

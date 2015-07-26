@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
+    public $timestamps = false;
     /**
      * The books that belong to the user.
      */

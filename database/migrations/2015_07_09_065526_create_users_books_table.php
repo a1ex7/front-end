@@ -19,7 +19,6 @@ class CreateUsersBooksTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
             $table->integer('book_id')->unsigned();
             $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');;
-            $table->timestamps();
         });
     }
 
