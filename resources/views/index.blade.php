@@ -27,7 +27,7 @@
     </table>
 
     <script type="text/template" class="users-list-template">
-        <td><span class="user-id"><%= id %></span></td>
+        <td><span class="user-id"><%= _.isUndefined(id) ? '' : id %></span></td>
         <td><span class="firstname"><%= firstname %></span></td>
         <td><span class="lastname"><%= lastname %></span></td>
         <td><span class="email"><%= email %></span></td>
@@ -47,6 +47,7 @@
             <th>ID</th>
             <th>Title</th>
             <th>Author</th>
+            <th>Year</th>
             <th>Genre</th>
             <th>Actions</th>
         </tr>
@@ -54,16 +55,18 @@
             <td></td>
             <td><input class="form-control title-input"/></td>
             <td><input class="form-control author-input"/></td>
+            <td><input class="form-control year-input"/></td>
             <td><input class="form-control genre-input"/></td>
             <td><button class="btn btn-primary add-book">Add</button></td>
         </tr>
         </thead>
         <tbody class="books-list"></tbody>
     </table>
-    <script type="text/template" class="book-list-template">
-        <td><span class="book-id"><%= id %></span></td>
+    <script type="text/template" class="books-list-template">
+        <td><span class="book-id"><%= _.isUndefined(id) ? '' : id %></span></td>
         <td><span class="title"><%= title %></span></td>
         <td><span class="author"><%= author %></span></td>
+        <td><span class="year"><%= year %></span></td>
         <td><span class="genre"><%= genre %></span></td>
         <td>
             <button class="btn btn-warning edit-book">Edit</button>
