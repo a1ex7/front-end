@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent;
@@ -24,9 +25,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::paginate(10);
+        $books = Book::all();
 
-        return view('book/index', ['books'=>$books]);
+        return Response::json($books);
     }
 
     /**
@@ -58,9 +59,7 @@ class BookController extends Controller
 
         if ($validator->fails()) {
 
-            return Redirect::to('books/create')
-                ->withErrors($validator)
-                ->withInput();
+            return Response::json($validator->messages(), 500);
         }
         else {
 
@@ -75,7 +74,7 @@ class BookController extends Controller
 
             Session::flash('message', 'New book successfully created');
 
-            return Redirect::to('books');
+            return Response::json($book);
 
         }
     }
@@ -89,7 +88,7 @@ class BookController extends Controller
     public function show($id)
     {
         $book = Book::find($id);
-        return view('book/show', ['book' => $book]);
+        return Response::json($book);
     }
 
     /**
@@ -123,9 +122,7 @@ class BookController extends Controller
 
         if ($validator->fails()) {
 
-            return Redirect::to('books/' . $id . '/edit')
-                ->withErrors($validator)
-                ->withInput();
+            return Response::json($validator->messages(), 500);
         }
         else {
 
@@ -140,7 +137,7 @@ class BookController extends Controller
 
             Session::flash('message', 'New book successfully updated');
 
-            return Redirect::to('books');
+            return Response::json($book);
 
         }
     }
@@ -158,7 +155,7 @@ class BookController extends Controller
 
         Session::flash('message', 'Deleted Book with ID: ' . $id);
 
-        return Redirect::to('books');
+        return Response::json(['status' => 'ok']);
     }
 
     /**

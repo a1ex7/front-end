@@ -24,10 +24,8 @@ class UserController extends Controller
      */
     public function index()
     {
-//        $users = User::with('books')->paginate(10);
         $users = User::all();
 
-//        return view('user/index', ['users'=>$users]);
         return Response::json($users);
     }
 
@@ -87,8 +85,6 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-//        $books = $user->books()->get();
-//        return view('user/show', ['user' => $user, 'books' => $books]);
         return Response::json($user);
     }
 
