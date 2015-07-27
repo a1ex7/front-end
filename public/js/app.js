@@ -238,16 +238,22 @@ var Router = Backbone.Router.extend({
     },
 
     users: function() {
-        console.log('Роут Users !');
+        $('.nav-pills li').removeClass('active');
+        $('#books').hide();
+        $('#users').show();
+        $('a[href=#users]').parent('li').addClass('active');
     },
 
     books: function() {
-        console.log('Роут Books!');
+        $('.nav-pills li').removeClass('active');
+        $('#users').hide();
+        $('#books').show();
+        $('a[href=#books]').parent('li').addClass('active');
     }
 
 });
 
-//new Router();
+new Router();
 
 Backbone.history.start();
 
