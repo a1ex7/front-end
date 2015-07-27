@@ -14,7 +14,6 @@ var User = Backbone.Model.extend({
         email: ''
     },
     validate: function( attrs ) {
-        console.log(attrs);
         if ( attrs.firstname == '' || attrs.lastname == '' || attrs.email == '') {
             return 'All fields are required';
         }
@@ -129,7 +128,6 @@ var Book = Backbone.Model.extend({
         genre: ''
     },
     validate: function( attrs ) {
-        console.log(attrs);
         if ( attrs.title == '' || attrs.author == '' || attrs.year == '' || attrs.genre == '') {
             return 'all fields are required';
         }
@@ -238,16 +236,22 @@ var Router = Backbone.Router.extend({
     },
 
     users: function() {
-        console.log('Роут Users !');
+        $('.nav-pills li').removeClass('active');
+        $('#books').hide();
+        $('#users').show();
+        $('a[href=#users]').parent('li').addClass('active');
     },
 
     books: function() {
-        console.log('Роут Books!');
+        $('.nav-pills li').removeClass('active');
+        $('#users').hide();
+        $('#books').show();
+        $('a[href=#books]').parent('li').addClass('active');
     }
 
 });
 
-//new Router();
+new Router();
 
 Backbone.history.start();
 
